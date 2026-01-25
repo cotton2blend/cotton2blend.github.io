@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotton2Blend - Premium T-Shirts</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Cotton2Blend - B2B Custom Apparel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -24,26 +24,23 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(251, 240, 220, 0.95);
+            background: rgba(251, 240, 220, 0.98);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(84, 32, 4, 0.1);
-            transition: padding 0.3s;
-        }
-
-        nav.scrolled {
-            padding: 1rem 5%;
+            border-bottom: 1px solid rgba(84, 32, 4, 0.1);
+            transition: all 0.3s;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #542004;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            cursor: pointer;
         }
 
         .logo span {
@@ -52,7 +49,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
             list-style: none;
         }
 
@@ -60,8 +57,11 @@
             color: #542004;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
             position: relative;
             transition: color 0.3s;
+            cursor: pointer;
+            letter-spacing: 0.5px;
         }
 
         .nav-links a::after {
@@ -72,18 +72,51 @@
             width: 0;
             height: 2px;
             background: #927f59;
-            transition: width 0.3s;
+            transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after,
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #927f59;
+        }
+
         .nav-links a.active::after {
             width: 100%;
         }
 
+        /* Page Container */
+        .page-container {
+            margin-top: 75px;
+            min-height: calc(100vh - 75px);
+            position: relative;
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: calc(100vh - 75px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(50px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            position: relative;
+        }
+
+        .page.exit-left {
+            transform: translateX(-50px);
+        }
+
         /* Hero Section */
         .hero {
-            margin-top: 80px;
-            height: 70vh;
+            height: 75vh;
             background: linear-gradient(135deg, #927f59 0%, #6b5d42 100%);
             display: flex;
             align-items: center;
@@ -98,509 +131,744 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(146, 127, 89, 0.9), rgba(107, 93, 66, 0.9));
+            background: linear-gradient(135deg, rgba(146, 127, 89, 0.95), rgba(107, 93, 66, 0.95));
             color: #fbf0dc;
-            font-size: 2rem;
+            font-size: 1.5rem;
             text-align: center;
             padding: 2rem;
         }
 
-        .hero-overlay {
+        .hero-content {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 3rem 5%;
-            background: linear-gradient(to top, rgba(84, 32, 4, 0.8), transparent);
+            padding: 4rem 6%;
+            background: linear-gradient(to top, rgba(84, 32, 4, 0.9), transparent);
             color: #fbf0dc;
         }
 
-        .hero-overlay h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            animation: fadeInUp 1s ease;
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
-        .hero-overlay p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
+        .hero-content p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
         }
 
-        /* Sections */
-        section {
-            padding: 5rem 10%;
-            min-height: 60vh;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s, transform 0.8s;
+        /* Home Content */
+        .home-intro {
+            padding: 5rem 6%;
+            background: #fbf0dc;
         }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #542004;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: #927f59;
-        }
-
-        /* About Section */
-        #about {
-            background: #fff;
-        }
-
-        .about-content {
+        .intro-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
+            gap: 4rem;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .about-text {
+        .intro-text h2 {
+            font-size: 2.5rem;
+            color: #542004;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .intro-text p {
             font-size: 1.1rem;
             line-height: 1.8;
             color: #542004;
+            margin-bottom: 1.5rem;
         }
 
-        .about-features {
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #542004;
+            color: #fbf0dc;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Roboto Slab', serif;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #927f59;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(84, 32, 4, 0.2);
+        }
+
+        .intro-features {
             display: grid;
             gap: 1.5rem;
         }
 
-        .feature {
-            padding: 1.5rem;
-            background: #fbf0dc;
+        .feature-card {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
             border-left: 4px solid #927f59;
-            border-radius: 5px;
-            transform: translateX(-20px);
-            opacity: 0;
-            transition: all 0.5s;
+            transition: all 0.3s;
         }
 
-        section.visible .feature {
-            transform: translateX(0);
-            opacity: 1;
+        .feature-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(84, 32, 4, 0.1);
         }
 
-        section.visible .feature:nth-child(1) { transition-delay: 0.1s; }
-        section.visible .feature:nth-child(2) { transition-delay: 0.2s; }
-        section.visible .feature:nth-child(3) { transition-delay: 0.3s; }
-
-        .feature h3 {
+        .feature-card h3 {
+            font-size: 1.3rem;
             color: #542004;
             margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #927f59;
+            line-height: 1.6;
+        }
+
+        /* Inventory Page */
+        #inventory {
+            padding: 4rem 6%;
+            background: #fbf0dc;
+            min-height: calc(100vh - 75px);
+        }
+
+        .inventory-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .inventory-header h1 {
+            font-size: 3rem;
+            color: #542004;
+            margin-bottom: 1rem;
+        }
+
+        .inventory-header p {
             font-size: 1.2rem;
+            color: #927f59;
         }
 
-        /* Products Section */
-        #products {
-            background: linear-gradient(135deg, #fbf0dc 0%, #f5e8cc 100%);
-        }
-
-        .product-grid {
+        .inventory-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .product-card {
+        .inventory-item {
             background: #fff;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(84, 32, 4, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s;
             cursor: pointer;
+            box-shadow: 0 2px 10px rgba(84, 32, 4, 0.08);
         }
 
-        .product-card:hover {
+        .inventory-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(84, 32, 4, 0.2);
+            box-shadow: 0 10px 30px rgba(84, 32, 4, 0.15);
         }
 
-        .product-image {
-            height: 250px;
+        .inventory-img {
+            height: 300px;
             background: linear-gradient(135deg, #927f59, #6b5d42);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fbf0dc;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
-        .product-info {
-            padding: 1.5rem;
+        .inventory-details {
+            padding: 2rem;
         }
 
-        .product-info h3 {
+        .inventory-details h3 {
+            font-size: 1.5rem;
             color: #542004;
             margin-bottom: 0.5rem;
         }
 
-        .product-info p {
+        .inventory-details .category {
             color: #927f59;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .inventory-details p {
+            color: #542004;
+            line-height: 1.6;
             margin-bottom: 1rem;
         }
 
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .inventory-details .price {
+            font-size: 1.1rem;
+            font-weight: 600;
             color: #542004;
         }
 
-        /* Contact Section */
-        #contact {
-            background: #542004;
-            color: #fbf0dc;
+        /* About Page */
+        #about {
+            padding: 4rem 6%;
+            background: #fff;
+            min-height: calc(100vh - 75px);
         }
 
-        #contact h2,
-        #contact h2::after {
+        .about-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .about-header h1 {
+            font-size: 3rem;
+            color: #542004;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            color: #927f59;
+            line-height: 1.8;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+
+        .about-section:nth-child(even) {
+            direction: rtl;
+        }
+
+        .about-section:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            color: #542004;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #542004;
+            margin-bottom: 1rem;
+        }
+
+        .about-visual {
+            height: 350px;
+            background: linear-gradient(135deg, #927f59, #6b5d42);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fbf0dc;
-            background: #927f59;
+            font-size: 1.2rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: #fbf0dc;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(84, 32, 4, 0.1);
+        }
+
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: #542004;
+            color: #fbf0dc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            color: #542004;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: #927f59;
+            line-height: 1.6;
+        }
+
+        /* Contact Page */
+        #contact {
+            padding: 4rem 6%;
+            background: linear-gradient(135deg, #6b7d5b 0%, #556b47 100%);
+            min-height: calc(100vh - 75px);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-header h1 {
+            font-size: 3rem;
+            color: #fbf0dc;
+            margin-bottom: 1rem;
+        }
+
+        .contact-header p {
+            font-size: 1.2rem;
+            color: rgba(251, 240, 220, 0.9);
         }
 
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
+            margin-bottom: 1.5rem;
         }
 
-        label {
+        .form-group label {
+            display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            color: #542004;
         }
 
-        input, textarea {
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
             padding: 1rem;
-            border: 2px solid #927f59;
-            background: #fbf0dc;
+            border: 2px solid #e0d5c7;
+            background: #fff;
             color: #542004;
-            border-radius: 5px;
+            border-radius: 4px;
             font-family: 'Roboto Slab', serif;
             font-size: 1rem;
             transition: border-color 0.3s;
         }
 
-        input:focus, textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #927f59;
         }
 
-        textarea {
+        .form-group textarea {
             resize: vertical;
             min-height: 150px;
         }
 
-        button {
-            padding: 1rem 2rem;
-            background: #927f59;
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: #542004;
             color: #fbf0dc;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             font-family: 'Roboto Slab', serif;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
+            transition: all 0.3s;
         }
 
-        button:hover {
-            background: #6b5d42;
+        .submit-btn:hover {
+            background: #927f59;
             transform: translateY(-2px);
         }
 
         .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            color: #fbf0dc;
         }
 
-        .contact-item {
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
             display: flex;
             align-items: start;
-            gap: 1rem;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
-        .contact-item-icon {
-            width: 40px;
-            height: 40px;
-            background: #927f59;
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(251, 240, 220, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
+            font-size: 1.5rem;
             flex-shrink: 0;
         }
 
-        /* Footer */
-        footer {
-            background: #3d1803;
+        .info-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
             color: #fbf0dc;
-            text-align: center;
-            padding: 2rem;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .info-content p {
+            color: rgba(251, 240, 220, 0.9);
+            line-height: 1.6;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .hero-overlay h1 {
-                font-size: 2rem;
-            }
-
-            .about-content,
+        @media (max-width: 968px) {
+            .intro-grid,
+            .about-section,
             .contact-container {
                 grid-template-columns: 1fr;
             }
 
-            section {
-                padding: 3rem 5%;
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav id="navbar">
-        <div class="logo">C<span>2</span>B</div>
+    <nav>
+        <div class="logo" onclick="navigate('home')">C<span>2</span>B</div>
         <ul class="nav-links">
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#products" class="nav-link">Products</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a class="nav-link active" data-page="home">Home</a></li>
+            <li><a class="nav-link" data-page="inventory">Inventory</a></li>
+            <li><a class="nav-link" data-page="about">About</a></li>
+            <li><a class="nav-link" data-page="contact">Contact</a></li>
         </ul>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-placeholder">
-            Your hero image will appear here
-        </div>
-        <div class="hero-overlay">
-            <h1>Premium Quality T-Shirts</h1>
-            <p>Crafted with care, designed for comfort</p>
-        </div>
-    </section>
+    <div class="page-container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <div class="hero-placeholder">
+                    Your hero image will appear here
+                </div>
+                <div class="hero-content">
+                    <h1>Elevate Your Brand</h1>
+                    <p>Premium custom apparel solutions for businesses that demand excellence</p>
+                </div>
+            </div>
 
-    <section id="about">
-        <h2>About Cotton2Blend</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>At Cotton2Blend, we believe that quality never goes out of style. Our t-shirts are crafted from premium materials, combining traditional craftsmanship with modern design sensibilities.</p>
-                <p style="margin-top: 1rem;">Every piece we create is a testament to our commitment to sustainability, comfort, and timeless style. We source responsibly and manufacture with care, ensuring each shirt meets our exacting standards.</p>
-            </div>
-            <div class="about-features">
-                <div class="feature">
-                    <h3>Premium Materials</h3>
-                    <p>100% organic cotton and sustainable blends</p>
-                </div>
-                <div class="feature">
-                    <h3>Expert Craftsmanship</h3>
-                    <p>Made with attention to every detail</p>
-                </div>
-                <div class="feature">
-                    <h3>Sustainable Process</h3>
-                    <p>Eco-friendly from start to finish</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="products">
-        <h2>Our Collection</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">Classic Crew Neck</div>
-                <div class="product-info">
-                    <h3>Classic Crew Neck</h3>
-                    <p>100% Organic Cotton</p>
-                    <div class="product-price">$32</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">V-Neck Tee</div>
-                <div class="product-info">
-                    <h3>V-Neck Tee</h3>
-                    <p>Cotton Bamboo Blend</p>
-                    <div class="product-price">$36</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">Pocket Tee</div>
-                <div class="product-info">
-                    <h3>Pocket Tee</h3>
-                    <p>Premium Cotton Blend</p>
-                    <div class="product-price">$38</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">Long Sleeve</div>
-                <div class="product-info">
-                    <h3>Long Sleeve Tee</h3>
-                    <p>100% Organic Cotton</p>
-                    <div class="product-price">$42</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Get In Touch</h2>
-        <div class="contact-container">
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" required></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-item-icon">@</div>
-                    <div>
-                        <h3>Email</h3>
-                        <p>hello@cotton2blend.com</p>
+            <div class="home-intro">
+                <div class="intro-grid">
+                    <div class="intro-text">
+                        <h2>Partner with Cotton2Blend</h2>
+                        <p>We specialize in providing high-quality custom t-shirts and apparel to businesses nationwide. From corporate uniforms to branded merchandise, we deliver exceptional products that represent your brand with pride.</p>
+                        <p>With decades of experience in B2B apparel manufacturing, we understand the importance of consistency, quality, and reliability in every order.</p>
+                        <button class="cta-button" onclick="navigate('inventory')">View Our Inventory</button>
                     </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon">☎</div>
-                    <div>
-                        <h3>Phone</h3>
-                        <p>(555) 123-4567</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon">⌂</div>
-                    <div>
-                        <h3>Location</h3>
-                        <p>123 Fabric Lane<br>Cotton City, TX 78901</p>
+                    <div class="intro-features">
+                        <div class="feature-card">
+                            <h3>Bulk Ordering</h3>
+                            <p>Competitive pricing for large volume orders with flexible minimums</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Custom Branding</h3>
+                            <p>Full customization options including screen printing, embroidery, and more</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Nationwide Shipping</h3>
+                            <p>Reliable delivery to businesses across the country</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2026 Cotton2Blend. All rights reserved.</p>
-    </footer>
+        <!-- Inventory Page -->
+        <div id="inventory" class="page">
+            <div class="inventory-header">
+                <h1>Our Inventory</h1>
+                <p>Premium apparel solutions for every business need</p>
+            </div>
+            <div class="inventory-grid">
+                <div class="inventory-item">
+                    <div class="inventory-img">Classic Crew Neck</div>
+                    <div class="inventory-details">
+                        <div class="category">Basic Tees</div>
+                        <h3>Classic Crew Neck</h3>
+                        <p>100% combed cotton, perfect for corporate uniforms and branded merchandise.</p>
+                        <div class="price">Starting at $8.50/unit</div>
+                    </div>
+                </div>
+                <div class="inventory-item">
+                    <div class="inventory-img">Premium V-Neck</div>
+                    <div class="inventory-details">
+                        <div class="category">Premium Line</div>
+                        <h3>Premium V-Neck</h3>
+                        <p>Soft cotton blend with enhanced durability for long-lasting wear.</p>
+                        <div class="price">Starting at $10.25/unit</div>
+                    </div>
+                </div>
+                <div class="inventory-item">
+                    <div class="inventory-img">Performance Tee</div>
+                    <div class="inventory-details">
+                        <div class="category">Athletic Wear</div>
+                        <h3>Performance Tee</h3>
+                        <p>Moisture-wicking fabric ideal for active workwear and sports teams.</p>
+                        <div class="price">Starting at $12.00/unit</div>
+                    </div>
+                </div>
+                <div class="inventory-item">
+                    <div class="inventory-img">Long Sleeve Tee</div>
+                    <div class="inventory-details">
+                        <div class="category">Basic Tees</div>
+                        <h3>Long Sleeve Tee</h3>
+                        <p>Durable construction perfect for year-round uniform programs.</p>
+                        <div class="price">Starting at $11.50/unit</div>
+                    </div>
+                </div>
+                <div class="inventory-item">
+                    <div class="inventory-img">Polo Shirt</div>
+                    <div class="inventory-details">
+                        <div class="category">Professional</div>
+                        <h3>Corporate Polo</h3>
+                        <p>Classic polo design for a professional, polished appearance.</p>
+                        <div class="price">Starting at $14.75/unit</div>
+                    </div>
+                </div>
+                <div class="inventory-item">
+                    <div class="inventory-img">Pocket Tee</div>
+                    <div class="inventory-details">
+                        <div class="category">Work Wear</div>
+                        <h3>Pocket Tee</h3>
+                        <p>Functional design with reinforced stitching for demanding environments.</p>
+                        <div class="price">Starting at $9.75/unit</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="about-header">
+                <h1>About Cotton2Blend</h1>
+                <p>Three decades of excellence in B2B apparel manufacturing</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-section">
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 1995, Cotton2Blend has grown from a small textile manufacturer to a trusted partner for businesses nationwide. We've built our reputation on quality craftsmanship, reliable service, and an unwavering commitment to our clients' success.</p>
+                        <p>Today, we serve hundreds of companies across diverse industries, from tech startups to Fortune 500 corporations, providing them with the premium apparel their brands deserve.</p>
+                    </div>
+                    <div class="about-visual">Our Manufacturing Excellence</div>
+                </div>
+
+                <div class="about-section">
+                    <div class="about-text">
+                        <h2>Sustainable Practices</h2>
+                        <p>We believe in responsible manufacturing. Our facilities utilize eco-friendly processes, from water conservation to renewable energy. We source organic and sustainable materials whenever possible, ensuring our products are as good for the planet as they are for your business.</p>
+                        <p>Every step of our production process is designed to minimize environmental impact while maximizing quality and efficiency.</p>
+                    </div>
+                    <div class="about-visual">Sustainability First</div>
+                </div>
+
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">★</div>
+                        <h3>Quality First</h3>
+                        <p>Every product undergoes rigorous quality control to ensure it meets our exacting standards</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">⚡</div>
+                        <h3>Fast Turnaround</h3>
+                        <p>Industry-leading production times without compromising on quality</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">♥</div>
+                        <h3>Client Partnership</h3>
+                        <p>Dedicated account managers who understand your business and brand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <div class="contact-header">
+                <h1>Let's Work Together</h1>
+                <p>Ready to elevate your brand? Get in touch with our team</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="company">Company Name *</label>
+                            <input type="text" id="company" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Contact Name *</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Tell us about your project *</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Inquiry</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h2>Contact Information</h2>
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>sales@cotton2blend.com<br>support@cotton2blend.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Phone</h3>
+                            <p>Sales: (555) 123-4567<br>Monday - Friday, 8AM - 6PM EST</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Headquarters</h3>
+                            <p>1234 Textile Boulevard<br>Manufacturing District<br>Charlotte, NC 28202</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                const navHeight = document.getElementById('navbar').offsetHeight;
-                const targetPosition = target.offsetTop - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Active nav link on scroll
-        const sections = document.querySelectorAll('section');
+        // Navigation functionality
         const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const navbar = document.getElementById('navbar');
+        function navigate(pageName) {
+            // Remove active class from all nav links
+            navLinks.forEach(link => link.classList.remove('active'));
             
-            // Navbar shrink on scroll
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            // Add active class to clicked nav link
+            const clickedLink = document.querySelector(`[data-page="${pageName}"]`);
+            if (clickedLink) {
+                clickedLink.classList.add('active');
             }
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
+            // Handle page transitions
+            const currentPage = document.querySelector('.page.active');
+            const targetPage = document.getElementById(pageName);
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
+            if (currentPage && targetPage && currentPage !== targetPage) {
+                // Add exit animation to current page
+                currentPage.classList.add('exit-left');
+                
+                setTimeout(() => {
+                    currentPage.classList.remove('active', 'exit-left');
+                    targetPage.classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                }, 300);
+            }
+        }
 
-        // Intersection Observer for section animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        // Add click event listeners to nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageName = link.getAttribute('data-page');
+                navigate(pageName);
             });
-        }, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
         });
 
         // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Thank you for your message! We\'ll get back to you soon.');
+            alert('Thank you for your inquiry! Our sales team will contact you within 24 hours.');
             e.target.reset();
+        });
+
+        // Smooth scroll to top on page change
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
         });
     </script>
 </body>
