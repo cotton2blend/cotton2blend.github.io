@@ -150,7 +150,6 @@
             line-height: 1.8;
         }
 
-        /* Home intro section */
         .home-intro {
             padding: 5rem 10%;
             background: var(--ivory);
@@ -210,108 +209,252 @@
 
         .about-hero {
             margin-top: 90px;
-            height: 70vh;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
+            padding: 6rem 10%;
+            background: var(--white);
             text-align: center;
-            padding: 2rem;
-        }
-
-        .about-hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            filter: brightness(0.4);
-            background: linear-gradient(135deg, #927f59, #6b5d42);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .about-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            padding: 3rem;
-            background: rgba(84, 32, 4, 0.7);
-            backdrop-filter: blur(5px);
-            border-radius: 4px;
         }
 
         .about-hero h1 {
             font-size: 3.5rem;
             font-weight: 600;
-            letter-spacing: 4px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
+            color: var(--mocha);
+            margin-bottom: 2rem;
         }
 
         .about-hero p {
             font-size: 1.3rem;
             font-weight: 300;
-            letter-spacing: 1px;
             line-height: 1.8;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            color: var(--tan);
+            max-width: 800px;
+            margin: 0 auto 3rem;
         }
 
-        .story-section {
-            padding: 6rem 10%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .story-block {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 6rem;
-            align-items: center;
-        }
-
-        .story-block:nth-child(even) {
-            direction: rtl;
-        }
-
-        .story-block:nth-child(even) > * {
-            direction: ltr;
-        }
-
-        .story-image {
+        .about-hero-image {
             width: 100%;
-            height: 100%;
-            aspect-ratio: 4/5;
-            overflow: hidden;
+            max-width: 1000px;
+            height: 500px;
+            margin: 0 auto;
             background: linear-gradient(135deg, #927f59, #6b5d42);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--ivory);
-            font-size: 1.3rem;
-            border-radius: 4px;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(84, 32, 4, 0.15);
         }
 
-        .story-text h2 {
-            font-size: 2rem;
+        .full-width-section {
+            padding: 5rem 10%;
+            background: var(--ivory);
+        }
+
+        .full-width-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .full-width-content h2 {
+            font-size: 2.5rem;
             font-weight: 600;
             letter-spacing: 2px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--mocha);
         }
 
-        .story-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
+        .full-width-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--mocha);
+            margin-bottom: 1.5rem;
+        }
+
+        .three-column-section {
+            padding: 5rem 10%;
+            background: var(--white);
+        }
+
+        .three-column-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .three-column-header h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
             color: var(--mocha);
             margin-bottom: 1rem;
+        }
+
+        .three-column-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .column-item {
+            text-align: center;
+        }
+
+        .column-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #927f59, #6b5d42);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ivory);
+            font-size: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .column-item:hover .column-image {
+            transform: scale(1.05);
+        }
+
+        .column-item h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--mocha);
+            margin-bottom: 1rem;
+        }
+
+        .column-item p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--tan);
+        }
+
+        .image-overlay-section {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+        }
+
+        .overlay-background {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6b5d42, #927f59);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ivory);
+            font-size: 1.5rem;
+        }
+
+        .overlay-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--ivory);
+            width: 90%;
+            max-width: 900px;
+        }
+
+        .overlay-content h2 {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .overlay-content p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            line-height: 1.8;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .timeline-section {
+            padding: 5rem 10%;
+            background: var(--ivory);
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-header h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--mocha);
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: var(--tan);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            order: 2;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 15px rgba(84, 32, 4, 0.1);
+        }
+
+        .timeline-year {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--tan);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            color: var(--mocha);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-content p {
+            color: var(--mocha);
+            line-height: 1.7;
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #927f59, #6b5d42);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ivory);
+            border-radius: 8px;
         }
 
         .contact-section {
@@ -508,7 +651,7 @@
             transform: translateY(0);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .hero-title {
                 font-size: 2.5rem;
             }
@@ -521,13 +664,18 @@
                 gap: 1.5rem;
             }
 
-            .story-block,
-            .intro-grid {
+            .intro-grid,
+            .three-column-grid,
+            .timeline-item {
                 grid-template-columns: 1fr;
             }
 
-            .story-block:nth-child(even) {
-                direction: ltr;
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                order: 1;
             }
 
             .contact-container {
@@ -535,10 +683,7 @@
                 gap: 3rem;
             }
 
-            .contact-info h1 {
-                font-size: 2rem;
-            }
-
+            .contact-info h1,
             .about-hero h1 {
                 font-size: 2rem;
             }
@@ -578,15 +723,15 @@
                 </div>
                 <div class="intro-features">
                     <div class="feature-card">
-                        <h3>Feature One</h3>
+                        <h3>Things You Offer #1</h3>
                         <p>Text</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Feature Two</h3>
+                        <h3>Things You Offer #2</h3>
                         <p>Text</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Feature Three</h3>
+                        <h3>Things You Offer #3</h3>
                         <p>Text</p>
                     </div>
                 </div>
@@ -595,44 +740,39 @@
     </div>
 
     <div id="about" class="page">
-        <section class="about-hero">
+        <section class="about-hero fade-in">
+            <h1>Our Story</h1>
+            <p>About tagline (optional).</p>
             <div class="about-hero-image">Image</div>
-            <div class="about-hero-content">
-                <h1>Our Story</h1>
-                <p>Tagline.</p>
+        </section>
+
+        <section class="full-width-section fade-in">
+            <div class="full-width-content">
+                <h2>Foundation</h2>
+                <p>Text.</p>
+                <p>Other text.</p>
             </div>
         </section>
 
-        <section class="story-section">
-            <div class="story-block fade-in">
-                <div class="story-image">Image</div>
-                <div class="story-text">
-                    <h2>Foundation</h2>
-                    <p>Established in Los Angeles.<br>Text.</p>
-                </div>
+        <section class="three-column-section fade-in">
+            <div class="three-column-header">
+                <h2>Other section</h2>
             </div>
-
-            <div class="story-block fade-in">
-                <div class="story-image">Image</div>
-                <div class="story-text">
-                    <h2>Craft</h2>
-                    <p>Text.</p>
+            <div class="three-column-grid">
+                <div class="column-item">
+                    <div class="column-image">Image</div>
+                    <h3>Fact</h3>
+                    <p>Description.</p>
                 </div>
-            </div>
-
-            <div class="story-block fade-in">
-                <div class="story-image">Image</div>
-                <div class="story-text">
-                    <h2>The Team</h2>
-                    <p>Text.</p>
+                <div class="column-item">
+                    <div class="column-image">Image</div>
+                    <h3>Fact</h3>
+                    <p>Description.</p>
                 </div>
-            </div>
-
-            <div class="story-block fade-in">
-                <div class="story-image">Image</div>
-                <div class="story-text">
-                    <h2>Other section</h2>
-                    <p>Text.</p>
+                <div class="column-item">
+                    <div class="column-image">Image</div>
+                    <h3>Fact</h3>
+                    <p>Description.</p>
                 </div>
             </div>
         </section>
@@ -657,7 +797,11 @@
                     </div>
                 </div>
                 <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
+                        <input type="hidden" name="_subject" value="New Contact Form Submission from cotton2blend">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="box">
+                        
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
@@ -738,16 +882,6 @@
                     });
                 }, 100);
             });
-        });
-
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const form = e.target;
-            const submitButton = form.querySelector('.submit-button');
-            
-            alert('Thank you for your message! We will get back to you soon.');
-            form.reset();
         });
     </script>
 </body>
