@@ -641,7 +641,7 @@
 <body>
  
 <nav id="navbar">
-  <div class="nav-logo" id="logoHome">Cotton<span>2</span>Blend</div>
+  <div class="nav-logo"><a href="#" data-page="home" style="text-decoration: none;">Cotton<span>2</span>Blend</a></div>
   <ul class="nav-links">
     <li><a href="#" class="active" data-page="home">Home</a></li>
     <li><a href="#" data-page="about">About</a></li>
@@ -911,14 +911,6 @@
       navigate(link.dataset.page);
     });
   });
-
-  document.getElementById('logoHome').addEventListener('click', () => {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById('home').classList.add('active');
-            document.querySelectorAll('.nav-links a').forEach(l => l.style.color = '');
-            document.querySelector('[data-page="home"]').style.color = 'var(--olive)';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
  
   function observeReveal() {
     const els = document.querySelectorAll('.page.active .reveal');
