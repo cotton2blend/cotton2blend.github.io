@@ -1,888 +1,961 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cotton2blend | Title Text</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --mocha: #542004;
-            --tan: #927f59;
-            --ivory: #fdf8f0;
-            --olive: #6b7d5b;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: 'Roboto Slab', serif;
-            color: var(--mocha);
-            background: var(--ivory);
-            line-height: 1.6;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(253, 248, 240, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1.8rem 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--tan);
-        }
-
-        .logo {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--mocha);
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .logo span {
-            color: var(--tan);
-        }
-
-        .logo:hover {
-            color: var(--tan);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--mocha);
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--tan);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--tan);
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 90px;
-            height: 75vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: linear-gradient(135deg, #927f59, #6b5d42);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
-            font-size: 1.5rem;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(84, 32, 4, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--ivory);
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 700;
-            letter-spacing: 6px;
-            margin-bottom: 1rem;
-        }
-
-        .hero-title span {
-            color: var(--tan);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            max-width: 800px;
-            line-height: 1.8;
-        }
-
-        .home-intro {
-            padding: 5rem 10%;
-            background: var(--ivory);
-        }
-
-        .intro-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .intro-text h2 {
-            font-size: 2.5rem;
-            color: var(--mocha);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .intro-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--mocha);
-            margin-bottom: 1.5rem;
-        }
-
-        .intro-features {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .feature-card {
-            padding: 2rem;
-            background: var(--white);
-            border-radius: 8px;
-            border-left: 4px solid var(--tan);
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(84, 32, 4, 0.1);
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            color: var(--mocha);
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-card p {
-            color: var(--tan);
-            line-height: 1.6;
-        }
-
-        .about-hero {
-            margin-top: 90px;
-            padding: 6rem 10%;
-            background: var(--white);
-            text-align: center;
-        }
-
-        .about-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: var(--mocha);
-            margin-bottom: 2rem;
-        }
-
-        .about-hero p {
-            font-size: 1.3rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: var(--tan);
-            max-width: 800px;
-            margin: 0 auto 3rem;
-        }
-
-        .about-hero-image {
-            width: 100%;
-            max-width: 1000px;
-            height: 500px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #927f59, #6b5d42);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
-            font-size: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(84, 32, 4, 0.15);
-        }
-
-        .full-width-section {
-            padding: 5rem 10%;
-            background: var(--ivory);
-        }
-
-        .full-width-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .full-width-content h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            color: var(--mocha);
-        }
-
-        .full-width-content p {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            color: var(--mocha);
-            margin-bottom: 1.5rem;
-        }
-
-        .three-column-section {
-            padding: 5rem 10%;
-            background: var(--white);
-        }
-
-        .three-column-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .three-column-header h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--mocha);
-            margin-bottom: 1rem;
-        }
-
-        .three-column-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .column-item {
-            text-align: center;
-        }
-
-        .column-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #927f59, #6b5d42);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
-            font-size: 1.2rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .column-item:hover .column-image {
-            transform: scale(1.05);
-        }
-
-        .column-item h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--mocha);
-            margin-bottom: 1rem;
-        }
-
-        .column-item p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--tan);
-        }
-
-        .image-overlay-section {
-            position: relative;
-            height: 60vh;
-            overflow: hidden;
-        }
-
-        .overlay-background {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #6b5d42, #927f59);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
-            font-size: 1.5rem;
-        }
-
-        .overlay-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: var(--ivory);
-            width: 90%;
-            max-width: 900px;
-        }
-
-        .overlay-content h2 {
-            font-size: 3rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .overlay-content p {
-            font-size: 1.3rem;
-            font-weight: 300;
-            line-height: 1.8;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-        }
-
-        .timeline-section {
-            padding: 5rem 10%;
-            background: var(--ivory);
-        }
-
-        .timeline-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .timeline-header h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--mocha);
-        }
-
-        .timeline {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 3px;
-            height: 100%;
-            background: var(--tan);
-        }
-
-        .timeline-item {
-            margin-bottom: 3rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            order: 2;
-        }
-
-        .timeline-content {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 3px 15px rgba(84, 32, 4, 0.1);
-        }
-
-        .timeline-year {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--tan);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content h3 {
-            font-size: 1.3rem;
-            color: var(--mocha);
-            margin-bottom: 0.75rem;
-        }
-
-        .timeline-content p {
-            color: var(--mocha);
-            line-height: 1.7;
-        }
-
-        .timeline-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #927f59, #6b5d42);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
-            border-radius: 8px;
-        }
-
-        .contact-section {
-            margin-top: 90px;
-            padding: 6rem 5%;
-            min-height: calc(100vh - 90px);
-            background: var(--ivory);
-        }
-
-        .contact-container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: start;
-        }
-
-        .contact-info {
-            padding-top: 2rem;
-        }
-
-        .contact-info h1 {
-            font-size: 3rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            margin-bottom: 3rem;
-            color: var(--mocha);
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .contact-detail {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .contact-label {
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--tan);
-            font-weight: 600;
-        }
-
-        .contact-value {
-            font-size: 1.1rem;
-            color: var(--mocha);
-            line-height: 1.6;
-        }
-
-        .contact-value a {
-            color: var(--mocha);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-value a:hover {
-            color: var(--tan);
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 30px rgba(84, 32, 4, 0.1);
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            color: var(--mocha);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 1rem;
-            border: 2px solid #e0d5c7;
-            background: white;
-            font-family: 'Roboto Slab', serif;
-            font-size: 1rem;
-            color: var(--mocha);
-            border-radius: 4px;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--tan);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-button {
-            padding: 1.2rem;
-            background: var(--mocha);
-            color: var(--ivory);
-            border: none;
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-family: 'Roboto Slab', serif;
-            transition: all 0.3s;
-        }
-
-        .submit-button:hover {
-            background: var(--tan);
-            transform: translateY(-2px);
-        }
-
-        footer {
-            background: var(--mocha);
-            color: var(--ivory);
-            padding: 3rem 5%;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-links a {
-            color: var(--ivory);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--tan);
-        }
-
-        .copyright {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            opacity: 0.8;
-        }
-
-        .page {
-            display: none;
-            opacity: 0;
-            animation: fadeIn 0.6s ease-in forwards;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 968px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .intro-grid,
-            .three-column-grid,
-            .timeline-item {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline::before {
-                left: 0;
-            }
-
-            .timeline-item:nth-child(even) .timeline-content {
-                order: 1;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .contact-info h1,
-            .about-hero h1 {
-                font-size: 2rem;
-            }
-
-            .about-hero p {
-                font-size: 1rem;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cotton2Blend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --warm-white: #FAF8F4;
+      --charcoal: #1E1E1E;
+      --mid-gray: #6B6B6B;
+      --light-gray: #D4CFC6;
+      --accent: #C8572A;
+      --accent-light: #E8896A;
+      --border: #E2DDD6;
+    }
+ 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+ 
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5vw;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+ 
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+ 
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+    }
+ 
+    .nav-logo span { color: var(--accent); }
+ 
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+ 
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+ 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+ 
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--charcoal); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+ 
+
+    .page { display: none; padding-top: 80px; }
+    .page.active { display: block; }
+ 
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 5vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 70% 60% at 80% 40%, rgba(200, 87, 42, 0.06) 0%, transparent 70%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 39px,
+          var(--border) 39px,
+          var(--border) 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 39px,
+          var(--border) 39px,
+          var(--border) 40px
+        );
+      opacity: 0.5;
+    }
+ 
+    .hero-content {
+      position: relative;
+      max-width: 680px;
+    }
+ 
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+ 
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--charcoal);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.35s ease forwards;
+    }
+ 
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+ 
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid-gray);
+      max-width: 500px;
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.5s ease forwards;
+    }
+ 
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+    }
+ 
+    .btn-primary {
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+ 
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200, 87, 42, 0.28);
+    }
+ 
+    .btn-ghost {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1.5px solid var(--charcoal);
+      margin-left: 1rem;
+    }
+ 
+    .btn-ghost:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      transform: translateY(-2px);
+    }
+ 
+    .hero-btns {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.65s ease forwards;
+    }
+ 
+    .hero-stat-row {
+      position: absolute;
+      bottom: 4rem;
+      right: 5vw;
+      display: flex;
+      gap: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s ease forwards;
+    }
+ 
+    .hero-stat { text-align: right; }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+ 
+    .hero-stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+    }
+ 
+
+    .section {
+      padding: 7rem 5vw;
+      border-top: 1px solid var(--border);
+    }
+ 
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+ 
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+      color: var(--charcoal);
+    }
+ 
+    .section-body {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid-gray);
+      max-width: 560px;
+    }
+ 
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      margin-top: 5rem;
+      border: 1.5px solid var(--border);
+    }
+ 
+    .pillar {
+      background: var(--warm-white);
+      padding: 2.8rem 2.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+ 
+    .pillar::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+ 
+    .pillar:hover { background: var(--cream); }
+    .pillar:hover::before { width: 100%; }
+ 
+    .pillar-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+ 
+    .pillar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: var(--charcoal);
+    }
+ 
+    .pillar-text {
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid-gray);
+    }
+ 
+
+    .marquee-wrap {
+      overflow: hidden;
+      background: var(--charcoal);
+      padding: 1.1rem 0;
+      border-top: 1px solid var(--border);
+    }
+ 
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+ 
+    .marquee-item {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+      flex-shrink: 0;
+    }
+ 
+    .marquee-dot {
+      color: var(--accent);
+      margin-right: 4rem;
+    }
+ 
+
+    .about-hero {
+      padding: 6rem 5vw 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+ 
+    @media (max-width: 768px) {
+      .about-hero { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-stat-row { position: static; margin-top: 3rem; justify-content: flex-start; }
+    }
+ 
+    .about-visual {
+      position: relative;
+      height: 420px;
+    }
+ 
+    .about-block {
+      position: absolute;
+      border: 1.5px solid var(--border);
+    }
+ 
+    .about-block-1 {
+      inset: 0;
+      background: var(--cream);
+    }
+ 
+    .about-block-2 {
+      bottom: -20px; right: -20px;
+      width: 55%; height: 55%;
+      background: var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+ 
+    .about-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--warm-white);
+      line-height: 1;
+      text-align: center;
+    }
+ 
+    .about-year-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+      text-align: center;
+      margin-top: 0.4rem;
+    }
+ 
+    .about-block-accent {
+      top: -16px; left: -16px;
+      width: 80px; height: 80px;
+      background: var(--accent);
+    }
+ 
+    .about-text-pattern {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 7rem;
+      font-weight: 900;
+      color: rgba(0,0,0,0.04);
+      user-select: none;
+      overflow: hidden;
+      letter-spacing: -0.04em;
+    }
+ 
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+ 
+    .value-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      background: var(--warm-white);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+ 
+    .value-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+ 
+    .value-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+ 
+    .value-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+ 
+    .value-text {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--mid-gray);
+    }
+ 
+
+    .contact-wrap {
+      padding: 6rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+ 
+    @media (max-width: 768px) {
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+    }
+ 
+    .contact-info-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+ 
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+ 
+    .contact-detail-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+ 
+    .contact-detail-value {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.5;
+    }
+ 
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+ 
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+ 
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+ 
+    .form-input,
+    .form-textarea {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      padding: 0.85rem 1.1rem;
+      border: 1.5px solid var(--border);
+      background: var(--warm-white);
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+ 
+    .form-input:focus,
+    .form-textarea:focus { border-color: var(--charcoal); }
+ 
+    .form-textarea { min-height: 130px; }
+ 
+    .form-submit {
+      align-self: flex-start;
+    }
+ 
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--mid-gray);
+      margin-top: 0.5rem;
+    }
+ 
+
+    footer {
+      background: var(--charcoal);
+      color: var(--light-gray);
+      padding: 3rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+ 
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--warm-white);
+    }
+ 
+    .footer-logo span { color: var(--accent-light); }
+ 
+    footer p {
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+ 
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+ 
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+ 
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+ 
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+ 
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+ 
+
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--accent);
+      margin: 1.6rem 0 2rem;
+    }
+ 
+
+    .success-msg {
+      display: none;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.4rem;
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="logo" id="logoHome">c<span>2</span>b</div>
-        <ul class="nav-links">
-            <li><a href="#" data-page="home" class="active">Home</a></li>
-            <li><a href="#" data-page="about">About</a></li>
-            <li><a href="#" data-page="contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <div id="home" class="page active">
-        <section class="hero">
-            <div class="hero-image">Image</div>
-            <div class="hero-overlay">
-                <h1 class="hero-title">c<span>2</span>b</h1>
-                <p class="hero-subtitle">Tagline.</p>
-            </div>
-        </section>
-
-        <section class="home-intro">
-            <div class="intro-grid">
-                <div class="intro-text">
-                    <h2>Partner with cotton2blend</h2>
-                    <p>Why people should partner.</p>
-                    <p>Extra text.</p>
-                </div>
-                <div class="intro-features">
-                    <div class="feature-card">
-                        <h3>Things You Offer #1</h3>
-                        <p>Text</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Things You Offer #2</h3>
-                        <p>Text</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Things You Offer #3</h3>
-                        <p>Text</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+ 
+<nav id="navbar">
+  <div class="nav-logo">Cotton<span>2</span>Blend</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active" data-page="home">Home</a></li>
+    <li><a href="#" data-page="about">About</a></li>
+    <li><a href="#" data-page="contact">Contact</a></li>
+  </ul>
+</nav>
+ 
+<div class="page active" id="page-home">
+ 
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">American-Made Quality</p>
+      <h1>Fabric Built<br>to <em>Last.</em></h1>
+      <p class="hero-sub">Premium t-shirts and garments rooted in North American craftsmanship — from yarn to finishing, we bring three decades of industry expertise to every piece.</p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="#" data-page="contact">Get in Touch</a>
+        <a class="btn btn-ghost" href="#" data-page="about">Our Story</a>
+      </div>
     </div>
-
-    <div id="about" class="page">
-        <section class="about-hero">
-            <h1>Our Story</h1>
-            <p>About tagline (optional).</p>
-            <div class="about-hero-image">Image</div>
-        </section>
-
-        <section class="full-width-section fade-in">
-            <div class="full-width-content">
-                <h2>Foundation</h2>
-                <p>Text.</p>
-                <p>Other text.</p>
-            </div>
-        </section>
-
-        <section class="three-column-section fade-in">
-            <div class="three-column-header">
-                <h2>Other section</h2>
-            </div>
-            <div class="three-column-grid">
-                <div class="column-item">
-                    <div class="column-image">Image</div>
-                    <h3>Fact</h3>
-                    <p>Description.</p>
-                </div>
-                <div class="column-item">
-                    <div class="column-image">Image</div>
-                    <h3>Fact</h3>
-                    <p>Description.</p>
-                </div>
-                <div class="column-item">
-                    <div class="column-image">Image</div>
-                    <h3>Fact</h3>
-                    <p>Description.</p>
-                </div>
-            </div>
-        </section>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num">30+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">American Yarn</div>
+      </div>
     </div>
-
-    <div id="contact" class="page">
-        <section class="contact-section">
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h1>Get In Touch</h1>
-                    <div class="contact-details">
-                        <div class="contact-detail">
-                            <div class="contact-label">Location</div>
-                            <div class="contact-value">Los Angeles, CA</div>
-                        </div>
-                        <div class="contact-detail">
-                            <div class="contact-label">Email</div>
-                            <div class="contact-value">
-                                <a href="mailto:contact@cotton2blend.com">contact@cotton2blend.com</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm" action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
-                        <input type="hidden" name="_subject" value="New Contact Form Submission from cotton2blend">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="box">
-                        
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+  </section>
+ 
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marquee">
+      <span class="marquee-item">American Yarn</span><span class="marquee-dot"></span>
+      <span class="marquee-item">North American Made</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Garment Dye</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Fabric Dye</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Piece Dye Goods</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Custom Printing</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Competitive Pricing</span><span class="marquee-dot"></span>
+      <span class="marquee-item">30 Years Industry Experience</span><span class="marquee-dot"></span>
+      <!-- duplicated for seamless loop -->
+      <span class="marquee-item">American Yarn</span><span class="marquee-dot"></span>
+      <span class="marquee-item">North American Made</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Garment Dye</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Fabric Dye</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Piece Dye Goods</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Custom Printing</span><span class="marquee-dot"></span>
+      <span class="marquee-item">Competitive Pricing</span><span class="marquee-dot"></span>
+      <span class="marquee-item">30 Years Industry Experience</span><span class="marquee-dot"></span>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-            </div>
-            <p class="copyright">© 2026 cotton2blend. All rights reserved.</p>
+  </div>
+ 
+  <section class="section">
+    <div class="reveal">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Garments Done Right,<br>From Start to Finish</h2>
+      <div class="divider"></div>
+      <p class="section-body">We work directly with suppliers and finishers to bring you quality garments at competitive prices — no middleman markup, just honest craftsmanship.</p>
+    </div>
+ 
+    <div class="pillars">
+      <div class="pillar reveal reveal-delay-1">
+        <span class="pillar-icon">🧵</span>
+        <div class="pillar-title">American Yarn & Fabric</div>
+        <p class="pillar-text">Our yarn is sourced domestically, ensuring consistent quality and supporting North American textile workers. Most production stays on this continent.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <span class="pillar-icon">👕</span>
+        <div class="pillar-title">Premium T-Shirt Supply</div>
+        <p class="pillar-text">We offer a range of t-shirt blanks and garments sourced from trusted North American suppliers — reliable construction, consistent sizing, quality you can feel.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <span class="pillar-icon">🎨</span>
+        <div class="pillar-title">Custom Finishing Options</div>
+        <p class="pillar-text">Choose from garment dye, fabric dye, or piece dye goods. Each method creates distinct textures and colorways to match your vision perfectly.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-4">
+        <span class="pillar-icon">🖨️</span>
+        <div class="pillar-title">Printing Available</div>
+        <p class="pillar-text">Need your design on the garment? Printing services are available to complete your order end to end — from blank to branded, all in one place.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-5">
+        <span class="pillar-icon">💰</span>
+        <div class="pillar-title">Competitive Pricing</div>
+        <p class="pillar-text">Three decades of industry relationships means we can offer genuine value without sacrificing the quality you expect from North American manufacturing.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <section style="background: var(--charcoal); padding: 5rem 5vw; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem;">
+    <div class="reveal">
+      <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-light);margin-bottom:0.8rem;">Ready to Work Together?</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:#fff;line-height:1.2;">Let's talk about your<br>next garment order.</h2>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <a class="btn btn-primary" href="#" data-page="contact" style="background:var(--accent);color:#fff;">Contact Us Today</a>
+    </div>
+  </section>
+ 
+</div>
+ 
+<div class="page" id="page-about">
+ 
+  <div class="about-hero">
+    <div>
+      <p class="section-label reveal">Our Story</p>
+      <h1 class="section-title reveal" style="font-size:clamp(2.2rem,4vw,3.5rem);">About Us</h1>
+      <div class="divider reveal"></div>
+      <p class="section-body reveal">We've spent three decades immersed in the fabric and garment industry — building relationships, refining our process, and learning what it truly takes to produce quality at scale. We know the difference between a well-made shirt and a cheap one, because we've seen both from the inside.</p>
+      <p class="section-body reveal reveal-delay-2" style="margin-top:1.4rem;">Our roots are in North American manufacturing. We believe in the craftsmanship that comes from domestic yarn, reliable suppliers, and hands-on experience — not outsourcing quality for a lower price tag.</p>
+    </div>
+    <div class="about-visual reveal reveal-delay-2">
+      <div class="about-block about-block-1">
+        <div class="about-text-pattern">TC</div>
+      </div>
+      <div class="about-block about-block-accent"></div>
+      <div class="about-block about-block-2">
+        <div>
+          <div class="about-year">30+</div>
+          <div class="about-year-label">Years Experience</div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- VALUES -->
+  <section class="section">
+    <p class="section-label reveal">Why We're Different</p>
+    <h2 class="section-title reveal">Built on These<br>Commitments</h2>
+    <div class="divider reveal"></div>
+ 
+    <div class="values-grid">
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-num">01</div>
+        <div class="value-title">Made in North America</div>
+        <p class="value-text">The majority of our product is produced right here in North America. That means more accountability, shorter lead times, and a product you can stand behind.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-num">02</div>
+        <div class="value-title">American Yarn</div>
+        <p class="value-text">We source yarn domestically. It's a choice that costs more up front but pays off in consistency, quality, and integrity of the final garment.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-3">
+        <div class="value-num">03</div>
+        <div class="value-title">Expert Finishing</div>
+        <p class="value-text">Garment dye, fabric dye, piece dye — we offer multiple finishing methods so the final look and feel of your garment is exactly what you envisioned.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-4">
+        <div class="value-num">04</div>
+        <div class="value-title">Industry Relationships</div>
+        <p class="value-text">Three decades in the industry means supplier relationships that translate directly into competitive pricing without compromising on what matters.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-5">
+        <div class="value-num">05</div>
+        <div class="value-title">Full-Service Capability</div>
+        <p class="value-text">From blank garment supply to custom finishing and printing, we handle more of your production chain — fewer vendors, less friction, better results.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="section" style="background: var(--cream);">
+    <p class="section-label reveal">Finishing Options</p>
+    <h2 class="section-title reveal">Three Ways to<br>Finish Your Garment</h2>
+    <div class="divider reveal"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:3rem;">
+      <div class="reveal reveal-delay-1" style="padding:2.2rem;background:var(--warm-white);border:1px solid var(--border);">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:0.8rem;color:var(--charcoal);">Garment Dye</h3>
+        <p style="font-size:0.9rem;font-weight:300;line-height:1.8;color:var(--mid-gray);">The fabric is cut and sewn first, then dyed as a finished garment. This creates that soft, lived-in look with slight tonal variation — a premium aesthetic that's highly sought after.</p>
+      </div>
+      <div class="reveal reveal-delay-2" style="padding:2.2rem;background:var(--warm-white);border:1px solid var(--border);">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:0.8rem;color:var(--charcoal);">Fabric Dye</h3>
+        <p style="font-size:0.9rem;font-weight:300;line-height:1.8;color:var(--mid-gray);">The fabric is dyed before construction. This results in a more consistent, uniform color throughout the garment — ideal for clean, bold colorways and precise color matching.</p>
+      </div>
+      <div class="reveal reveal-delay-3" style="padding:2.2rem;background:var(--warm-white);border:1px solid var(--border);">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:0.8rem;color:var(--charcoal);">Piece Dye Goods</h3>
+        <p style="font-size:0.9rem;font-weight:300;line-height:1.8;color:var(--mid-gray);">Individual pieces of fabric are dyed separately before cutting and sewing. This method allows flexibility in mixing tones and is well-suited for larger production runs requiring color consistency.</p>
+      </div>
+    </div>
+  </section>
+ 
+</div>
+ 
 
-    <script>
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<div class="page" id="page-contact">
+ 
+  <section style="padding: 5rem 5vw 2rem; border-bottom: 1px solid var(--border);">
+    <p class="section-label reveal">Get in Touch</p>
+    <h1 class="section-title reveal" style="font-size:clamp(2.2rem,4vw,3.5rem);">Contact Us</h1>
+    <div class="divider reveal"></div>
+    <p class="section-body reveal">Whether you have a question about our garments, pricing, or capabilities — we'd love to hear from you. Fill out the form and we'll get back to you shortly.</p>
+  </section>
+ 
+  <div class="contact-wrap">
+ 
+    <div>
+      <div class="contact-info-item reveal">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">info@heritageTeeco.com</div>
+        </div>
+      </div>
+      <div class="contact-info-item reveal reveal-delay-1">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value">(000) 000-0000</div>
+        </div>
+      </div>
+      <div class="contact-info-item reveal reveal-delay-2">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-detail-label">Location</div>
+          <div class="contact-detail-value">North America</div>
+        </div>
+      </div>
+      <div class="contact-info-item reveal reveal-delay-3">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-detail-label">Business Hours</div>
+          <div class="contact-detail-value">Mon – Fri, 9am – 5pm</div>
+        </div>
+      </div>
+ 
+      <div class="reveal reveal-delay-4" style="margin-top:2.5rem;padding:2rem;background:var(--cream);border:1px solid var(--border);">
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.7rem;">What to Expect</p>
+        <p style="font-size:0.9rem;font-weight:300;line-height:1.8;color:var(--mid-gray);">We typically respond within one business day. When you reach out, feel free to include details about quantity, garment type, or finishing preferences — it helps us give you a more useful first reply.</p>
+      </div>
+    </div>
+ 
+    <div class="reveal reveal-delay-1">
+      <div class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" placeholder="Jane Smith" id="fname"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="youremail@example.com" id="femail"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company / Brand (optional)</label>
+          <input class="form-input" type="text" placeholder="Your brand name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell us about your project, quantities, or any questions you have..."></textarea>
+        </div>
+        <button class="btn btn-primary form-submit" onclick="submitForm()">Send Message</button>
+        <div class="success-msg" id="successMsg">✓ Thank you! Your message has been sent. We'll be in touch soon.</div>
+      </div>
+    </div>
+ 
+  </div>
+ 
+</div>
+ 
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        document.getElementById('logoHome').addEventListener('click', () => {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById('home').classList.add('active');
-            document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-            document.querySelector('[data-page="home"]').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const pages = document.querySelectorAll('.page');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetPage = link.getAttribute('data-page');
-
-                pages.forEach(page => page.classList.remove('active'));
-                document.getElementById(targetPage).classList.add('active');
-
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                setTimeout(() => {
-                    document.querySelectorAll('.fade-in').forEach(el => {
-                        el.classList.remove('visible');
-                        observer.observe(el);
-                    });
-                }, 100);
-            });
-        });
-    </script>
+<footer>
+  <div class="footer-logo">Cotton<span>2</span> Blend</div>
+  <p>© 2025 Cotton2Blend. All rights reserved.</p>
+  <p style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;">North American Craftsmanship</p>
+</footer>
+ 
+<script>
+  function navigate(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    document.querySelectorAll('[data-page="' + pageId + '"]').forEach(a => a.classList.add('active'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Re-trigger reveal animations for newly visible page
+    setTimeout(() => observeReveal(), 50);
+  }
+ 
+  document.querySelectorAll('[data-page]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      navigate(link.dataset.page);
+    });
+  });
+ 
+  function observeReveal() {
+    const els = document.querySelectorAll('.page.active .reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => observer.observe(el));
+  }
+ 
+  observeReveal();
+ 
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+  });
+ 
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    if (!name || !email) {
+      alert('Please fill in your name and email before sending.');
+      return;
+    }
+    const msg = document.getElementById('successMsg');
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 6000);
+    document.getElementById('fname').value = '';
+    document.getElementById('femail').value = '';
+  }
+</script>
 </body>
 </html>
